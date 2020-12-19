@@ -1,28 +1,13 @@
-import React from "react";
 import "./App.css";
-import logo from "./logo.svg";
+import {Board} from "./main/board";
+import {BoardElement} from "./main/board_element";
 
 function App() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                    <br/>
-                    Hello World!
-                </a>
-            </header>
+    return <div className="App">
+        <div>
+            <BoardElement board={Board.example()}/>
         </div>
-    );
+    </div>;
 }
 
 export default App;
