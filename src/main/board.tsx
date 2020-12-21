@@ -19,14 +19,14 @@ const Letter: FC<{
 };
 
 const Word: FC<{
-    word: readonly string[];
+    word: string;
     selectedIndex: number;
     setSelectedIndex: (index: number) => void;
 }> = ({word, selectedIndex, setSelectedIndex}) => {
     return <div style={{
         display: "table-row",
     }}>
-        {word.map((letter, i) => <Letter
+        {[...word].map((letter, i) => <Letter
             key={i}
             letter={letter}
             selected={selectedIndex === i}
@@ -36,24 +36,31 @@ const Word: FC<{
 };
 
 export const Board: FC<{
-    words: string[][];
-}> = ({words}) => {
-    const [[x, y], setXY] = useState([-1, -1]);
+    startingWords: readonly string[];
+    checkWords: (words: readonly string[]) => void,
+}> = ({startingWords, checkWords}) => {
+    const [{x, y, words, check}, setState] =
+        useState({x: -1, y: -1, words: startingWords, check: false});
+    if (check) {
+        checkWords(words);
+    }
     
-    function ij2xy(i: number, j: number): [number, number] {
+    function setIJ(i: number, j: number) {
         console.log({i, j, x, y});
         if (y === -1 || x === -1) {
             // no letters clicked on yet
-            return [i, j];
+            setState({x: i, y: j, words, check: false});
         } else if (x === i && y === j) {
             // clicked on same letter twice
-            return [-1, -1];
+            setState({x: -1, y: -1, words, check: false});
         } else {
             // one letter clicked on, so swap them now
-            const temp = words[i][j];
-            words[i][j] = words[x][y];
-            words[x][y] = temp;
-            return [-1, -1];
+            const splitWords = words.map(word => [...word]);
+            const temp = splitWords[i][j];
+            splitWords[i][j] = splitWords[x][y];
+            splitWords[x][y] = temp;
+            const newWords = splitWords.map(word => word.join(""));
+            setState({x: -1, y: -1, words: newWords, check: true});
         }
     }
     
@@ -64,7 +71,7 @@ export const Board: FC<{
             key={i}
             word={word}
             selectedIndex={i === x ? y : -1}
-            setSelectedIndex={j => setXY(ij2xy(i, j))}
+            setSelectedIndex={j => setIJ(i, j)}
         />)}
     </div>;
 };

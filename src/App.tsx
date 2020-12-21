@@ -1,16 +1,17 @@
 import "./App.css";
-import {Board} from "./main/board";
+import {Game} from "./main/game";
+import {Lexicon} from "./main/lexicon";
 
 function App() {
     return <div className="App">
         <div>
-            <Board words={[
+            <Game lexicon={new Lexicon([
                 "A",
                 "HI",
                 "TWO",
                 "FOUR",
                 "HELLO",
-            ].map(word => [...word])}/>
+            ])} size={5}/>
         </div>
     </div>;
 }
