@@ -39,20 +39,16 @@ export const Board: FC<{
     startingWords: readonly string[];
     checkWords: (words: readonly string[]) => void,
 }> = ({startingWords, checkWords}) => {
-    const [{x, y, words, check}, setState] =
-        useState({x: -1, y: -1, words: startingWords, check: false});
-    if (check) {
-        checkWords(words);
-    }
+    const [{x, y, words}, setState] =
+        useState({x: -1, y: -1, words: startingWords});
     
     function setIJ(i: number, j: number) {
-        console.log({i, j, x, y});
         if (y === -1 || x === -1) {
             // no letters clicked on yet
-            setState({x: i, y: j, words, check: false});
+            setState({x: i, y: j, words});
         } else if (x === i && y === j) {
             // clicked on same letter twice
-            setState({x: -1, y: -1, words, check: false});
+            setState({x: -1, y: -1, words});
         } else {
             // one letter clicked on, so swap them now
             const splitWords = words.map(word => [...word]);
@@ -60,7 +56,8 @@ export const Board: FC<{
             splitWords[i][j] = splitWords[x][y];
             splitWords[x][y] = temp;
             const newWords = splitWords.map(word => word.join(""));
-            setState({x: -1, y: -1, words: newWords, check: true});
+            setState({x: -1, y: -1, words: newWords});
+            checkWords(newWords);
         }
     }
     
