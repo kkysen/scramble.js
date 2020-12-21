@@ -11,6 +11,9 @@ function App() {
                 "TWO",
                 "FOUR",
                 "HELLO",
+                "I",
+                "HA",
+                "AH",
             ])} size={5}/>
         </div>
     </div>;
