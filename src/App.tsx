@@ -1,11 +1,16 @@
 import "./App.css";
 import {Board} from "./main/board";
-import {BoardElement} from "./main/board_element";
 
 function App() {
     return <div className="App">
         <div>
-            <BoardElement board={Board.example()}/>
+            <Board words={[
+                "A",
+                "HI",
+                "TWO",
+                "FOUR",
+                "HELLO",
+            ].map(word => [...word])}/>
         </div>
     </div>;
 }

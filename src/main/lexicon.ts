@@ -1,5 +1,4 @@
 import iterate from "iterare";
-import {Board} from "./board";
 import {range} from "./range";
 
 export class Lexicon {
@@ -21,11 +20,10 @@ export class Lexicon {
         return words[Math.random() * words.length];
     }
     
-    randomBoard(size: number): Board {
-        return new Board(
-            range({stop: size})
-                .map(i => this.randomWord(i + 1))
-                .toArray()
-        );
+    randomBoard(size: number): string[][] {
+        return range({stop: size})
+            .map(i => this.randomWord(i + 1))
+            .map(word => [...word])
+            .toArray();
     }
 }
