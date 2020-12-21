@@ -40,4 +40,19 @@ export class Lexicon {
         return words.every(word => this.checkWord(word));
     }
     
+    wordChecker(): WordChecker {
+        return {
+            word: word => this.checkWord(word),
+            words: words => this.checkWords(words),
+        }
+    }
+    
+}
+
+export interface WordChecker {
+    
+    word(word: string): boolean;
+    
+    words(words: readonly string[]): boolean;
+    
 }

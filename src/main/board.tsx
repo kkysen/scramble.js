@@ -1,4 +1,5 @@
 import {FC, useState} from "react";
+import {WordChecker} from "./lexicon";
 
 const Letter: FC<{
     letter: string;
@@ -20,11 +21,13 @@ const Letter: FC<{
 
 const Word: FC<{
     word: string;
+    isWord: boolean;
     selectedIndex: number;
     setSelectedIndex: (index: number) => void;
-}> = ({word, selectedIndex, setSelectedIndex}) => {
+}> = ({word, isWord, selectedIndex, setSelectedIndex}) => {
     return <div style={{
         display: "table-row",
+        fontWeight: isWord ? "bold" : "normal",
     }}>
         {[...word].map((letter, i) => <Letter
             key={i}
@@ -37,8 +40,9 @@ const Word: FC<{
 
 export const Board: FC<{
     startingWords: readonly string[];
-    checkWords: (words: readonly string[]) => void,
-}> = ({startingWords, checkWords}) => {
+    wordChecker: WordChecker,
+    setSolved: (solved: boolean) => void,
+}> = ({startingWords, wordChecker: check, setSolved}) => {
     const [{x, y, words}, setState] =
         useState({x: -1, y: -1, words: startingWords});
     
@@ -57,7 +61,7 @@ export const Board: FC<{
             splitWords[x][y] = temp;
             const newWords = splitWords.map(word => word.join(""));
             setState({x: -1, y: -1, words: newWords});
-            checkWords(newWords);
+            setSolved(check.words(newWords));
         }
     }
     
@@ -67,6 +71,7 @@ export const Board: FC<{
         {words.map((word, i) => <Word
             key={i}
             word={word}
+            isWord={check.word(word)}
             selectedIndex={i === x ? y : -1}
             setSelectedIndex={j => setIJ(i, j)}
         />)}

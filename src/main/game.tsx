@@ -8,10 +8,10 @@ export const Game: FC<{
     lexicon: Lexicon,
     size: number,
 }> = ({lexicon, size}) => {
-    const solution = lexicon.randomWords(size);
-    console.log(solution);
-    const letters = shuffledString(solution.join(""));
     const startingWords = (() => {
+        const solution = lexicon.randomWords(size);
+        console.log(solution);
+        const letters = shuffledString(solution.join(""));
         const words: string[] = [];
         let start = 0;
         for (let i = 1; i <= size; i++) {
@@ -26,10 +26,17 @@ export const Game: FC<{
     return <div>
         <Board
             startingWords={startingWords}
-            checkWords={words => setSolved(lexicon.checkWords(words))}
+            wordChecker={lexicon.wordChecker()}
+            setSolved={setSolved}
         />
         <div>
             {solved && "Done!"}
         </div>
+    </div>;
+};
+
+export const Games: FC<{}> = () => {
+    return <div>
+    
     </div>;
 };
