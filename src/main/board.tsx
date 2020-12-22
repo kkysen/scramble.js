@@ -1,5 +1,5 @@
 import {FC, useState} from "react";
-import {WordChecker} from "./lexicon";
+import {ShuffledWords, WordChecker} from "./lexicon";
 
 const Letter: FC<{
     letter: string;
@@ -39,20 +39,24 @@ const Word: FC<{
 };
 
 export const Board: FC<{
-    startingWords: readonly string[];
-    wordChecker: WordChecker,
-    setSolved: (solved: boolean) => void,
-}> = ({startingWords, wordChecker: check, setSolved}) => {
-    const [{x, y, words}, setState] =
-        useState({x: -1, y: -1, words: startingWords});
+    words: ShuffledWords;
+    wordChecker: WordChecker;
+    Solution: FC<{
+        solved: boolean;
+        showSolution: () => void;
+    }>;
+}> = ({words: {solution, shuffled}, wordChecker: check, Solution}) => {
+    const [{x, y, words, solved}, setState] = useState(() => {
+        return {x: -1, y: -1, words: shuffled, solved: check.words(shuffled)};
+    });
     
     function setIJ(i: number, j: number) {
         if (y === -1 || x === -1) {
             // no letters clicked on yet
-            setState({x: i, y: j, words});
+            setState({x: i, y: j, words, solved});
         } else if (x === i && y === j) {
             // clicked on same letter twice
-            setState({x: -1, y: -1, words});
+            setState({x: -1, y: -1, words, solved});
         } else {
             // one letter clicked on, so swap them now
             const splitWords = words.map(word => [...word]);
@@ -60,20 +64,25 @@ export const Board: FC<{
             splitWords[i][j] = splitWords[x][y];
             splitWords[x][y] = temp;
             const newWords = splitWords.map(word => word.join(""));
-            setState({x: -1, y: -1, words: newWords});
-            setSolved(check.words(newWords));
+            setState({x: -1, y: -1, words: newWords, solved: check.words(newWords)});
         }
     }
     
-    return <div style={{
-        display: "table",
-    }}>
-        {words.map((word, i) => <Word
-            key={i}
-            word={word}
-            isWord={check.word(word)}
-            selectedIndex={i === x ? y : -1}
-            setSelectedIndex={j => setIJ(i, j)}
-        />)}
-    </div>;
+    return <>
+        <div style={{
+            display: "table",
+        }}>
+            {words.map((word, i) => <Word
+                key={i}
+                word={word}
+                isWord={check.word(word)}
+                selectedIndex={i === x ? y : -1}
+                setSelectedIndex={j => setIJ(i, j)}
+            />)}
+        </div>
+        <Solution
+            solved={solved}
+            showSolution={() => setState({x: -1, y: -1, words: solution, solved: true})}
+        />
+    </>;
 };

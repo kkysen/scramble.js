@@ -1,41 +1,49 @@
 import {FC, useState} from "react";
 import {Board} from "./board";
 import {Lexicon} from "./lexicon";
-import {shuffledString} from "./shuffle";
 
 
-export const Game: FC<{
-    lexicon: Lexicon,
-    size: number,
-}> = ({lexicon, size}) => {
-    const startingWords = (() => {
-        const solution = lexicon.randomWords(size);
-        console.log(solution);
-        const letters = shuffledString(solution.join(""));
-        const words: string[] = [];
-        let start = 0;
-        for (let i = 1; i <= size; i++) {
-            const end = start + i;
-            words.push(letters.slice(start, end));
-            start = end;
-        }
-        return words;
-    })();
-    const [solved, setSolved] = useState(lexicon.checkWords(startingWords));
-    
+interface GameOptions {
+    lexicon: Lexicon;
+    size: number;
+    timeInSeconds: number;
+}
+
+export const Game: FC<GameOptions> = ({lexicon, size, timeInSeconds}) => {
+    const words = lexicon.randomShuffledWords(size);
+    console.log(words.solution);
     return <div>
         <Board
-            startingWords={startingWords}
+            words={words}
             wordChecker={lexicon.wordChecker()}
-            setSolved={setSolved}
+            Solution={({solved, showSolution}) => <div>
+                {solved ? "Done!" : <button onClick={showSolution}>Show Solution</button>}
+            </div>}
         />
-        <div>
-            {solved && "Done!"}
-        </div>
+    </div>;
+};
+
+const NewGameChooser: FC<{
+    options: GameOptions,
+    setOptions: (options: GameOptions) => void,
+}> = ({options, setOptions}) => {
+    return <div>
+        <button>Play Again!</button>
     </div>;
 };
 
 export const Games: FC<{}> = () => {
+    const lexicon = new Lexicon("English Sample", [
+        "A",
+        "HI",
+        "TWO",
+        "FOUR",
+        "HELLO",
+        "I",
+        "HA",
+        "AH",
+    ]);
+    const [options, setOptions] = useState<GameOptions>({lexicon, size: 5, timeInSeconds: NaN});
     return <div>
     
     </div>;

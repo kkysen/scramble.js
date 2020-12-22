@@ -5,7 +5,7 @@ import {Lexicon} from "./main/lexicon";
 function App() {
     return <div className="App">
         <div>
-            <Game lexicon={new Lexicon([
+            <Game lexicon={new Lexicon("English Sample", [
                 "A",
                 "HI",
                 "TWO",
@@ -14,7 +14,7 @@ function App() {
                 "I",
                 "HA",
                 "AH",
-            ])} size={5}/>
+            ])} size={5} timeInSeconds={Infinity}/>
         </div>
     </div>;
 }
