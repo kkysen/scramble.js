@@ -10,7 +10,10 @@ export class Lexicon {
     
     constructor(name: string, words: Iterable<string>) {
         this.name = name;
-        this.words = new Set(iterate(words).map(s => s.toUpperCase()));
+        this.words = iterate(words)
+            .filter(s => s.length > 0)
+            .map(s => s.toLowerCase())
+            .toSet();
         const maxLength = iterate(this.words).map(e => e.length).reduce(Math.max);
         const wordsByLength: string[][] = range({stop: maxLength + 1})
             .map(() => [] as string[])

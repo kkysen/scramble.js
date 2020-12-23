@@ -29,7 +29,7 @@ const Word: FC<{
         display: "table-row",
         fontWeight: isWord ? "bold" : "normal",
     }}>
-        {[...word].map((letter, i) => <Letter
+        {[...word.toUpperCase()].map((letter, i) => <Letter
             key={i}
             letter={letter}
             selected={selectedIndex === i}
@@ -48,6 +48,8 @@ export const Board: FC<{
     wordChecker: WordChecker;
     Solution: FC<SolutionProps>;
 }> = ({words: {solution, shuffled}, wordChecker: check, Solution}) => {
+    console.log(solution);
+    
     const initState = useCallback(() => {
         return {x: -1, y: -1, words: shuffled, solved: check.words(shuffled)};
     }, [check, shuffled]);
