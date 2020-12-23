@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC, useCallback, useEffect, useState} from "react";
 import {ShuffledWords, WordChecker} from "./lexicon";
 
 const Letter: FC<{
@@ -38,17 +38,26 @@ const Word: FC<{
     </div>;
 };
 
+export interface SolutionProps {
+    solved: boolean;
+    showSolution: () => void;
+}
+
 export const Board: FC<{
     words: ShuffledWords;
     wordChecker: WordChecker;
-    Solution: FC<{
-        solved: boolean;
-        showSolution: () => void;
-    }>;
+    Solution: FC<SolutionProps>;
 }> = ({words: {solution, shuffled}, wordChecker: check, Solution}) => {
-    const [{x, y, words, solved}, setState] = useState(() => {
+    const initState = useCallback(() => {
         return {x: -1, y: -1, words: shuffled, solved: check.words(shuffled)};
-    });
+    }, [check, shuffled]);
+    
+    const [{x, y, words, solved}, setState] = useState(initState);
+    
+    useEffect(() => {
+        setState(initState());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [initState]);
     
     function setIJ(i: number, j: number) {
         if (y === -1 || x === -1) {

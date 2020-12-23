@@ -33,9 +33,26 @@ export class Lexicon {
         return this.wordsByLength(length).length > 0;
     }
     
-    lengths(): Iterable<number> {
-        return range({stop: this.rawWordsByLength.length})
+    private maxLengthBound(): number {
+        return this.rawWordsByLength.length;
+    }
+    
+    private lengthRange(): IteratorWithOperators<number> {
+        return range({start: 1, stop: this.maxLengthBound()});
+    }
+    
+    lengths(): IteratorWithOperators<number> {
+        return this
+            .lengthRange()
             .filter(length => this.hasLength(length));
+    }
+    
+    consecutiveLengths(): IteratorWithOperators<number> {
+        const onePastMaxLength = this
+                .lengthRange()
+                .find(length => !this.hasLength(length))
+            ?? this.maxLengthBound();
+        return range({start: 1, stop: onePastMaxLength});
     }
     
     checkWord(word: string): boolean {
@@ -93,3 +110,8 @@ export interface WordChecker {
     words(words: readonly string[]): boolean;
     
 }
+
+// Lexicons are available under /lexicons/${name}.txt
+// But their names are hard-coded in JS.
+// It's pretty easy to keep these in sync,
+// and it saves an extra fetch.
