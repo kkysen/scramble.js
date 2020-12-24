@@ -9,10 +9,9 @@ const Letter: FC<{
     return <div
         onClick={setSelected}
         style={{
-            display: "table-cell",
-            borderColor: "black",
-            borderRadius: "1px",
             backgroundColor: selected ? "yellow" : "white",
+            padding: "20px",
+            fontSize: "x-large",
         }}
     >
         {letter}
@@ -26,7 +25,8 @@ const Word: FC<{
     setSelectedIndex: (index: number) => void;
 }> = ({word, isWord, selectedIndex, setSelectedIndex}) => {
     return <div style={{
-        display: "table-row",
+        display: "flex",
+        justifyContent: "center",
         fontWeight: isWord ? "bold" : "normal",
     }}>
         {[...word.toUpperCase()].map((letter, i) => <Letter
@@ -80,9 +80,7 @@ export const Board: FC<{
     }
     
     return <>
-        <div style={{
-            display: "table",
-        }}>
+        <div>
             {words.map((word, i) => <Word
                 key={i}
                 word={word}
