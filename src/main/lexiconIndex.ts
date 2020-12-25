@@ -60,11 +60,75 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
         }
     },
     {
+        "name": "British English Huge",
+        "size": {
+            "numWords": 246195,
+            "numChars": 2281671,
+            "numBytes": 2528654
+        }
+    },
+    {
+        "name": "British English Insane",
+        "size": {
+            "numWords": 428462,
+            "numChars": 4118763,
+            "numBytes": 4548013
+        }
+    },
+    {
+        "name": "British English Large",
+        "size": {
+            "numWords": 113753,
+            "numChars": 998356,
+            "numBytes": 1112357
+        }
+    },
+    {
+        "name": "British English Small",
+        "size": {
+            "numWords": 39820,
+            "numChars": 314691,
+            "numBytes": 354551
+        }
+    },
+    {
         "name": "British English",
         "size": {
             "numWords": 62955,
             "numChars": 523025,
             "numBytes": 586106
+        }
+    },
+    {
+        "name": "Canadian English Huge",
+        "size": {
+            "numWords": 246732,
+            "numChars": 2286330,
+            "numBytes": 2533852
+        }
+    },
+    {
+        "name": "Canadian English Insane",
+        "size": {
+            "numWords": 429041,
+            "numChars": 4123832,
+            "numBytes": 4553663
+        }
+    },
+    {
+        "name": "Canadian English Large",
+        "size": {
+            "numWords": 114188,
+            "numChars": 1002020,
+            "numBytes": 1116458
+        }
+    },
+    {
+        "name": "Canadian English Small",
+        "size": {
+            "numWords": 40073,
+            "numChars": 316754,
+            "numBytes": 356867
         }
     },
     {
@@ -81,6 +145,14 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numWords": 594065,
             "numChars": 5988133,
             "numBytes": 6784110
+        }
+    },
+    {
+        "name": "Danish (Dansk)",
+        "size": {
+            "numWords": 295965,
+            "numChars": 3425472,
+            "numBytes": 3806959
         }
     },
     {
@@ -108,11 +180,35 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
         }
     },
     {
+        "name": "Faroese (Foeroyskt)",
+        "size": {
+            "numWords": 153166,
+            "numChars": 1599931,
+            "numBytes": 1753096
+        }
+    },
+    {
         "name": "French",
         "size": {
             "numWords": 137604,
             "numChars": 1314669,
             "numBytes": 1512829
+        }
+    },
+    {
+        "name": "Galician Minimos (Galician)",
+        "size": {
+            "numWords": 515124,
+            "numChars": 5428079,
+            "numBytes": 6090218
+        }
+    },
+    {
+        "name": "German Medical",
+        "size": {
+            "numWords": 6450,
+            "numChars": 83597,
+            "numBytes": 90046
         }
     },
     {
@@ -137,6 +233,14 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numWords": 483403,
             "numChars": 5571739,
             "numBytes": 6055141
+        }
+    },
+    {
+        "name": "Ogerman",
+        "size": {
+            "numWords": 194769,
+            "numChars": 2289694,
+            "numBytes": 2531475
         }
     },
     {
@@ -172,11 +276,27 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
         }
     },
     {
+        "name": "Swiss",
+        "size": {
+            "numWords": 237045,
+            "numChars": 2828025,
+            "numBytes": 3115027
+        }
+    },
+    {
         "name": "Ukrainian",
         "size": {
             "numWords": 1398873,
             "numChars": 14791431,
             "numBytes": 30981734
+        }
+    },
+    {
+        "name": "Web2",
+        "size": {
+            "numWords": 210680,
+            "numChars": 2038459,
+            "numBytes": 2249138
         }
     }
 ];
