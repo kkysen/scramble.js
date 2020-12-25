@@ -62,7 +62,7 @@ class Lexicons {
             .toMap();
         this.defaultNameKey = "scramble.lexicon.default";
         this._defaultName = this.getDefaultName();
-        this.default(); // fetch immediately
+        this.default().get(); // fetch immediately
     }
     
     [Symbol.iterator](): IterableIterator<LexiconHandle> {
