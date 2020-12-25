@@ -87,12 +87,11 @@ export const Board: FC<{
     const showingSolution = words === solution;
     
     useEffect(() => {
-        console.log(solution.join("\n"));
         if (!isFirst) {
-            setState(initState(false));
+            console.log(solution.join("\n"));
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [initState]);
+        setState(initState(false));
+    }, [initState, isFirst, solution]);
     
     function setIJ(i: number, j: number) {
         if (y === -1 || x === -1) {
