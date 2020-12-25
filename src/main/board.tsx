@@ -15,8 +15,9 @@ const Letter: FC<{
             readonly boardSize: number;
             readonly scale: number;
         }
-        const a: Point = {boardSize: 5, scale: 1}
-        const b: Point = {boardSize: 25, scale: 2}
+        
+        const a: Point = {boardSize: 5, scale: 1};
+        const b: Point = {boardSize: 25, scale: 2};
         const slope = (a.scale - b.scale) / (a.boardSize - b.boardSize);
         const scale = slope * (boardSize - a.boardSize) + a.scale;
         return n => n / scale;
@@ -67,7 +68,9 @@ const Word: FC<{
 
 export interface SolutionProps {
     solved: boolean;
+    showingSolution: boolean;
     showSolution: () => void;
+    numMoves: number;
 }
 
 export const Board: FC<{
@@ -78,10 +81,11 @@ export const Board: FC<{
     console.log(solution);
     
     const initState = useCallback(() => {
-        return {x: -1, y: -1, words: shuffled, solved: check.words(shuffled)};
+        return {x: -1, y: -1, words: shuffled, solved: check.words(shuffled), numMoves: 0};
     }, [check, shuffled]);
     
-    const [{x, y, words, solved}, setState] = useState(initState);
+    const [{x, y, words, solved, numMoves}, setState] = useState(initState);
+    const showingSolution = words === solution;
     
     useEffect(() => {
         setState(initState());
@@ -91,10 +95,10 @@ export const Board: FC<{
     function setIJ(i: number, j: number) {
         if (y === -1 || x === -1) {
             // no letters clicked on yet
-            setState({x: i, y: j, words, solved});
+            setState({x: i, y: j, words, solved, numMoves});
         } else if (x === i && y === j) {
             // clicked on same letter twice
-            setState({x: -1, y: -1, words, solved});
+            setState({x: -1, y: -1, words, solved, numMoves});
         } else {
             // one letter clicked on, so swap them now
             const splitWords = words.map(word => [...word]);
@@ -102,7 +106,13 @@ export const Board: FC<{
             splitWords[i][j] = splitWords[x][y];
             splitWords[x][y] = temp;
             const newWords = splitWords.map(word => word.join(""));
-            setState({x: -1, y: -1, words: newWords, solved: check.words(newWords)});
+            setState({
+                x: -1,
+                y: -1,
+                words: newWords,
+                solved: check.words(newWords),
+                numMoves: numMoves + 1,
+            });
         }
     }
     
@@ -119,7 +129,15 @@ export const Board: FC<{
         </div>
         <Solution
             solved={solved}
-            showSolution={() => setState({x: -1, y: -1, words: solution, solved: true})}
+            showingSolution={showingSolution}
+            showSolution={() => setState({
+                x: -1,
+                y: -1,
+                words: solution,
+                solved: true,
+                numMoves,
+            })}
+            numMoves={numMoves}
         />
     </>;
 };

@@ -10,9 +10,12 @@ interface GameOptions {
     size: number;
 }
 
-const GameSolution: FC<SolutionProps> = ({solved, showSolution}) => <div>
-    {solved ? "Done!" : <button onClick={showSolution}>Show Solution</button>}
-</div>;
+const GameSolution: FC<SolutionProps> = ({solved, showingSolution, showSolution, numMoves}) => {
+    return <>
+        <div>{showingSolution ? "Gave Up In " : ""}{numMoves} Moves</div>
+        <div>{solved ? (showingSolution ? "Done!" : "You Won!") : <button onClick={showSolution}>Show Solution</button>}</div>
+    </>;
+};
 
 export const Game: FC<GameOptions> = ({lexicon, size}) => {
     const words = lexicon.randomShuffledWords(size);
