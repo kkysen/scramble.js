@@ -17,10 +17,10 @@ addAptLexicon fileName: (addLexicons "/usr/share/dict/" + fileName)
 addAptLexicons: (addAptLexicon "*")
 
 echoInstallAptLexicons:
-    just aptLexiconPackages | skipJustPrelude | map echo apt
+    just aptLexiconPackages | skipJustPrelude | map echo apt install
 
 installAptLexicons:
-    just echoAddAptLexicons | sudo "${SHELL}"
+    just echoInstallAptLexicons | sudo "${SHELL}"
 
 # from https://packages.debian.org/sid/wordlist
 aptLexiconPackages:
