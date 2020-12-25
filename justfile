@@ -8,7 +8,9 @@ node script *args:
 
 indexLexicons: (node "indexLexicons")
 
-addLexicons *paths: (node "addLexicon" paths)
+addLexicon name path: (node "addLexicon" name path)
+
+addLexicons *paths: (node "addLexicons" paths)
 
 addAptLexicon fileName: (addLexicons "/usr/share/dict/" + fileName)
 
