@@ -34,7 +34,7 @@ export class LexiconMetadataImpl implements LexiconMetadataPlus {
     }
     
     toString(): string {
-        return `Lexicon ${this.name}`;
+        return `Lexicon "${this.name}"`;
     }
     
     label(): string {

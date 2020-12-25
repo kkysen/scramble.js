@@ -19,7 +19,7 @@ class LexiconHandleImpl extends LexiconMetadataImpl implements LexiconHandle {
     
     private async fetch(): Promise<Lexicon> {
         const name = this.name;
-        const response = await fetch(`/lexicons/${name}.txt`);
+        const response = await fetch(`lexicons/${name}.txt`);
         const text = await response.text();
         if (text.startsWith("<!DOCTYPE html>")) {
             throw new Error(`the ${this} doesn't actually exist on the server`);
