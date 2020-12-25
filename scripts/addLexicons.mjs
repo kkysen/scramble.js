@@ -60,10 +60,10 @@ async function addLexicons(paths) {
     const files = await Promise.all(
         paths
             .map(path => {
-                const {name} = pathLib.parse(path);
-                return {path, name};
+                const {name, ext} = pathLib.parse(path);
+                return {path, name, ext};
             })
-            .filter(e => !["README", "words"].includes(e.name))
+            .filter(e => !e.ext && !["README", "words"].includes(e.name))
             .map(async ({path, name}) => {
                 const stats = await fsp.lstat(path);
                 const isSymlink = stats.isSymbolicLink();
