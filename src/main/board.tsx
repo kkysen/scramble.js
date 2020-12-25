@@ -4,14 +4,36 @@ import {ShuffledWords, WordChecker} from "./lexicon";
 const Letter: FC<{
     letter: string;
     selected: boolean;
-    setSelected: () => void,
-}> = ({letter, selected, setSelected}) => {
+    setSelected: () => void;
+    isWord: boolean;
+    boardSize: number;
+}> = ({letter, selected, setSelected, isWord, boardSize}) => {
+    const size = ((): (n: number) => number => {
+        // we want to pin these two scales and adjust in-between
+        // use point-slope form to calculate scale
+        interface Point {
+            readonly boardSize: number;
+            readonly scale: number;
+        }
+        const a: Point = {boardSize: 5, scale: 1}
+        const b: Point = {boardSize: 25, scale: 2}
+        const slope = (a.scale - b.scale) / (a.boardSize - b.boardSize);
+        const scale = slope * (boardSize - a.boardSize) + a.scale;
+        return n => n / scale;
+    })();
+    
     return <div
         onClick={setSelected}
         style={{
             backgroundColor: selected ? "yellow" : "white",
-            padding: "20px",
-            fontSize: "x-large",
+            padding: `${size(1)}%`,
+            margin: `${size(0.2)}%`,
+            width: `${size(3)}%`,
+            fontSize: `${size(3)}vw`,
+            borderWidth: `${size(1)}vw`,
+            borderStyle: selected ? "inset" : "outset",
+            borderRadius: isWord ? `${size(2)}vw` : 0,
+            textAlign: "center",
         }}
     >
         {letter}
@@ -23,10 +45,13 @@ const Word: FC<{
     isWord: boolean;
     selectedIndex: number;
     setSelectedIndex: (index: number) => void;
-}> = ({word, isWord, selectedIndex, setSelectedIndex}) => {
+    boardSize: number;
+}> = ({word, isWord, selectedIndex, setSelectedIndex, boardSize}) => {
     return <div style={{
         display: "flex",
         justifyContent: "center",
+        alignItems: "center",
+        alignContent: "center",
         fontWeight: isWord ? "bold" : "normal",
     }}>
         {[...word.toUpperCase()].map((letter, i) => <Letter
@@ -34,6 +59,8 @@ const Word: FC<{
             letter={letter}
             selected={selectedIndex === i}
             setSelected={() => setSelectedIndex(i)}
+            isWord={isWord}
+            boardSize={boardSize}
         />)}
     </div>;
 };
@@ -87,6 +114,7 @@ export const Board: FC<{
                 isWord={check.word(word)}
                 selectedIndex={i === x ? y : -1}
                 setSelectedIndex={j => setIJ(i, j)}
+                boardSize={words.length}
             />)}
         </div>
         <Solution
