@@ -1,6 +1,7 @@
 import * as child_process from "child_process";
 import {promises as fsp} from "fs";
 import pathLib from "path";
+import {main} from "./run.mjs";
 
 
 /**
@@ -54,7 +55,7 @@ function determineNames(files) {
 
 /**
  * @param {string[]} paths
- * @return {undefined}
+ * @return {void}
  */
 async function addLexicons(paths) {
     const files = await Promise.all(
@@ -83,20 +84,6 @@ async function addLexicons(paths) {
     );
 }
 
-async function asyncMain() {
-    // eslint-disable-next-line no-unused-vars
-    const [_node, _script, ...args] = process.argv;
+main(async (args) => {
     await addLexicons(args);
-}
-
-function main() {
-    (async () => {
-        try {
-            await asyncMain();
-        } catch (e) {
-            console.error(e);
-        }
-    })();
-}
-
-main();
+})()

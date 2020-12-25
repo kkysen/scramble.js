@@ -1,8 +1,9 @@
 import {promises as fsp} from "fs";
 import {iterate} from "iterare";
 import * as pathLib from "path";
+import {main} from "./run.mjs";
 
-async function asyncMain() {
+async function indexLexicons() {
     const dir = "./public/lexicons";
     const paths = await fsp.readdir(dir);
     const promises = iterate(paths)
@@ -42,14 +43,6 @@ export const ${name}: readonly LexiconMetadata[] = ${json};
     await fsp.writeFile(`./src/main/${name}.ts`, ts);
 }
 
-function main() {
-    (async () => {
-        try {
-            await asyncMain();
-        } catch (e) {
-            console.error(e);
-        }
-    })();
-}
-
-main();
+main(async () => {
+    await indexLexicons();
+})();

@@ -1,4 +1,5 @@
 import {promises as fsp} from "fs";
+import {main} from "./run.mjs";
 
 /**
  * @param {string} words
@@ -21,7 +22,7 @@ function filterWords(words, and = undefined) {
 /**
  * @param {string} name
  * @param {string} path
- * @return {undefined}
+ * @return {void}
  */
 async function addLexicon(name, path) {
     console.log(`adding lexicon "${name}" from "${path}"`);
@@ -33,21 +34,6 @@ async function addLexicon(name, path) {
     await fsp.writeFile(`./public/lexicons/${name}.txt`, words);
 }
 
-async function asyncMain() {
-    // eslint-disable-next-line no-unused-vars
-    const [_node, _script, ...args] = process.argv;
-    const [name, path] = args;
+main(async ([name, path]) => {
     await addLexicon(name, path);
-}
-
-function main() {
-    (async () => {
-        try {
-            await asyncMain();
-        } catch (e) {
-            console.error(e);
-        }
-    })();
-}
-
-main();
+})();
