@@ -81,7 +81,7 @@ class Lexicons {
         if (defaultName !== null && this.handles.has(defaultName)) {
             return defaultName;
         } else {
-            return this.iter().map(e => e.name).find(() => true)!!;
+            return this.iter().map(e => e.name).find(() => true)!;
         }
     }
     
