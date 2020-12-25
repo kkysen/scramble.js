@@ -1,3 +1,4 @@
+import fileSize from "filesize";
 import {FC, useEffect, useState} from "react";
 import {default as Dropdown} from "react-dropdown";
 import "react-dropdown/style.css";
@@ -90,7 +91,7 @@ const NewGameChooser: FC<{
         <Dropdown
             options={lexicons.iter().map(e => ({
                 value: e.name,
-                label: `${e.name} (${e.size.numWords} words)`,
+                label: `${e.name} (${e.size.numWords} words, ${fileSize(e.size.numBytes)})`,
             })).toArray()}
             value={lexiconHandle.name}
             onChange={e => setLexiconHandle(lexicons.get(e.value))}
