@@ -1,3 +1,4 @@
+import fileSize from "filesize";
 import iterate from "iterare";
 import {IteratorWithOperators} from "iterare/lib/iterate";
 import {LexiconHandle} from "./lexicons";
@@ -15,7 +16,12 @@ export interface LexiconMetadata {
     readonly size: LexiconSize;
 }
 
-export class LexiconMetadataImpl implements LexiconMetadata {
+export interface LexiconMetadataPlus extends LexiconMetadata {
+    toString(): string;
+    label(): string;
+}
+
+export class LexiconMetadataImpl implements LexiconMetadataPlus {
     
     constructor(protected metadata: LexiconMetadata) {}
     
@@ -29,6 +35,10 @@ export class LexiconMetadataImpl implements LexiconMetadata {
     
     toString(): string {
         return `Lexicon ${this.name}`;
+    }
+    
+    label(): string {
+        return `${this.name} (${this.size.numWords} words, ${fileSize(this.size.numBytes)})`;
     }
     
 }

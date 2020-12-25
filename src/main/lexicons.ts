@@ -1,11 +1,11 @@
 import iterate from "iterare";
 import {IteratorWithOperators} from "iterare/lib/iterate";
 import {globals} from "./globals";
-import {Lexicon, LexiconMetadata, LexiconMetadataImpl} from "./lexicon";
+import {Lexicon, LexiconMetadata, LexiconMetadataImpl, LexiconMetadataPlus} from "./lexicon";
 import {lexiconIndex} from "./lexiconIndex";
 import {MaybePromise} from "./maybePromise";
 
-export interface LexiconHandle extends LexiconMetadata {
+export interface LexiconHandle extends LexiconMetadataPlus {
     getCachedPromise(): MaybePromise<Lexicon> | undefined;
     
     getCached(): Lexicon | undefined;

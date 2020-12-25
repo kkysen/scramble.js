@@ -1,4 +1,3 @@
-import fileSize from "filesize";
 import {FC, useEffect, useState} from "react";
 import {default as Dropdown} from "react-dropdown";
 import "react-dropdown/style.css";
@@ -74,25 +73,22 @@ const NewGameChooser: FC<{
         }
     }, [lexicon]);
     
-    console.log(lexicon);
-    
     return <div>
-        <button disabled={!(lexicon && size !== undefined)} onClick={() => {
-            if (lexicon && size !== undefined) {
-                setOptions({lexicon, size});
-            } else {
-                throw new Error(`impossible`);
-            }
-        }}>
+        <button
+            disabled={!(lexicon && size !== undefined)}
+            onClick={() => {
+                if (lexicon && size !== undefined) {
+                    setOptions({lexicon, size});
+                } else {
+                    throw new Error(`impossible`);
+                }
+            }}>
             {`Play${starting.again ? " Again" : ""}!`}
         </button>
         <br/>
         <label>Lexicon</label>
         <Dropdown
-            options={lexicons.iter().map(e => ({
-                value: e.name,
-                label: `${e.name} (${e.size.numWords} words, ${fileSize(e.size.numBytes)})`,
-            })).toArray()}
+            options={lexicons.iter().map(e => ({value: e.name, label: e.label()})).toArray()}
             value={lexiconHandle.name}
             onChange={e => setLexiconHandle(lexicons.get(e.value))}
         />
