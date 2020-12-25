@@ -1,9 +1,7 @@
 import {FC} from "react";
 import "./App.css";
-import {Games} from "./main/game";
+import {Scramble} from "./main/scramble";
 
 export const App: FC = () => {
-    return <div className="App">
-        <Games/>
-    </div>;
+    return <Scramble/>;
 };
