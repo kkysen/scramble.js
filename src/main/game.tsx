@@ -10,10 +10,19 @@ interface GameOptions {
     size: number;
 }
 
-const GameSolution: FC<SolutionProps> = ({solved, showingSolution, showSolution, numMoves}) => {
+const GameSolution: FC<SolutionProps> = ({solved, showingSolution, showSolution, numMoves, shuffle}) => {
     return <>
-        <div>{showingSolution ? "Gave Up In " : ""}{numMoves} Moves</div>
-        <div>{solved ? (showingSolution ? "Done!" : "You Won!") : <button onClick={showSolution}>Show Solution</button>}</div>
+        <div>
+            {showingSolution ? "Gave Up In " : ""}{numMoves} Moves
+        </div>
+        <div>
+            {solved
+                ? (showingSolution ? "Done!" : "You Won!")
+                : <button onClick={showSolution}>Show Solution</button>}
+        </div>
+        <div>
+            <button onClick={shuffle}>Shuffle</button>
+        </div>
     </>;
 };
 

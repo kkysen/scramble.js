@@ -18,6 +18,7 @@ export interface LexiconMetadata {
 
 export interface LexiconMetadataPlus extends LexiconMetadata {
     toString(): string;
+    
     label(): string;
 }
 
@@ -128,23 +129,41 @@ export class Lexicon extends LexiconMetadataImpl {
     }
     
     randomShuffledWords(size: number): ShuffledWords {
-        const solution = this.randomWords(size).toArray();
-        const letters = shuffledString(solution.join(""));
-        const words: string[] = [];
-        let start = 0;
-        for (let i = 1; i <= size; i++) {
-            const end = start + i;
-            words.push(letters.slice(start, end));
-            start = end;
-        }
-        return {solution, shuffled: words};
+        return new ShuffledWords(this.randomWords(size).toArray());
     }
     
 }
 
-export interface ShuffledWords {
-    readonly solution: readonly string[];
-    readonly shuffled: readonly string[];
+export class ShuffledWords {
+    
+    private _shuffled: readonly string[];
+    
+    constructor(readonly solution: readonly string[]) {
+        this._shuffled = this.shuffle();
+    }
+    
+    get shuffled(): readonly string[] {
+        return this._shuffled;
+    }
+    
+    private doShuffle(): readonly string[] {
+        const solution = this.solution;
+        const letters = shuffledString(solution.join(""));
+        const words: string[] = [];
+        let start = 0;
+        for (let i = 1; i <= solution.length; i++) {
+            const end = start + i;
+            words.push(letters.slice(start, end));
+            start = end;
+        }
+        return words;
+    }
+    
+    shuffle(): readonly string[] {
+        this._shuffled = this.doShuffle();
+        return this._shuffled;
+    }
+    
 }
 
 export interface WordChecker {

@@ -72,13 +72,16 @@ export interface SolutionProps {
     showingSolution: boolean;
     showSolution: () => void;
     numMoves: number;
+    shuffle: () => void;
 }
 
 export const Board: FC<{
     words: ShuffledWords;
     wordChecker: WordChecker;
     Solution: FC<SolutionProps>;
-}> = ({words: {solution, shuffled}, wordChecker: check, Solution}) => {
+}> = ({words: shuffleWords, wordChecker: check, Solution}) => {
+    const {solution, shuffled} = shuffleWords;
+    
     const initState = useCallback((isFirst: boolean) => {
         return {isFirst, x: -1, y: -1, words: shuffled, solved: check.words(shuffled), numMoves: 0};
     }, [check, shuffled]);
@@ -90,8 +93,11 @@ export const Board: FC<{
         if (!isFirst) {
             console.log(solution.join("\n"));
         }
+    }, [isFirst, solution])
+    
+    useEffect(() => {
         setState(initState(false));
-    }, [initState, isFirst, solution]);
+    }, [initState]);
     
     function setIJ(i: number, j: number) {
         if (y === -1 || x === -1) {
@@ -141,6 +147,17 @@ export const Board: FC<{
                 numMoves,
             })}
             numMoves={numMoves}
+            shuffle={() => {
+                const newWords = shuffleWords.shuffle();
+                setState({
+                    isFirst: false,
+                    x: -1,
+                    y: -1,
+                    words: newWords,
+                    solved: check.words(newWords),
+                    numMoves,
+                });
+            }}
         />
     </>;
 };
