@@ -26,7 +26,8 @@ const Letter: FC<{
     return <div
         onClick={setSelected}
         style={{
-            backgroundColor: selected ? "yellow" : "white",
+            backgroundColor: selected ? "yellow" : isWord ? "#13E049" : "white",
+            color: selected ? "black" : isWord ? "red" : "black",
             padding: `${size(1)}%`,
             margin: `${size(0.2)}%`,
             width: `${size(3)}%`,
