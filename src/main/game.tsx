@@ -3,7 +3,7 @@ import {default as Dropdown} from "react-dropdown";
 import "react-dropdown/style.css";
 import {Board, SolutionProps} from "./board";
 import {Lexicon} from "./lexicon";
-import {lexicons} from "./lexicons";
+import {LexiconHandle, lexicons} from "./lexicons";
 
 interface GameOptions {
     lexicon: Lexicon;
@@ -28,8 +28,7 @@ export const Game: FC<GameOptions> = ({lexicon, size}) => {
 
 interface StartGameOptions {
     readonly again: boolean;
-    readonly lexicon?: Lexicon;
-    readonly lexiconName: string;
+    readonly lexiconHandle: LexiconHandle;
     readonly size?: number;
 }
 
@@ -42,31 +41,31 @@ const NewGameChooser: FC<{
             return {
                 again: true,
                 ...options,
-                lexiconName: options.lexicon.name,
+                lexiconHandle: options.lexicon.handle,
             };
         } else {
             return {
                 again: false,
-                lexiconName: lexicons.defaultName(),
+                lexiconHandle: lexicons.default(),
             };
         }
     })();
     
-    const [lexiconName, setLexiconName] = useState(starting.lexiconName);
-    const [lexicon, setLexicon] = useState(starting.lexicon);
+    const [lexiconHandle, setLexiconHandle] = useState(starting.lexiconHandle);
+    const [lexicon, setLexicon] = useState(starting.lexiconHandle.getCached());
     const [size, setSize] = useState(starting.size);
     
     useEffect(() => {
         // so that an old chosen size doesn't go chosen with a wrong lexicon
         setSize(undefined);
         
-        const newLexicon = lexicons.get(lexiconName);
+        const newLexicon = lexiconHandle.get();
         if (newLexicon instanceof Promise) {
             newLexicon.then(setLexicon);
         } else {
             setLexicon(newLexicon);
         }
-    }, [lexiconName]);
+    }, [lexiconHandle]);
     
     useEffect(() => {
         if (lexicon) {
@@ -89,9 +88,12 @@ const NewGameChooser: FC<{
         <br/>
         <label>Lexicon</label>
         <Dropdown
-            options={lexicons.names().toArray()}
-            value={lexiconName}
-            onChange={e => setLexiconName(e.value)}
+            options={lexicons.iter().map(e => ({
+                value: e.name,
+                label: `${e.name} (${e.size.numWords} words)`,
+            })).toArray()}
+            value={lexiconHandle.name}
+            onChange={e => setLexiconHandle(lexicons.get(e.value))}
         />
         {lexicon && <>
             <label>Size</label>

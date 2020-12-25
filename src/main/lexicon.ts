@@ -1,15 +1,46 @@
 import iterate from "iterare";
 import {IteratorWithOperators} from "iterare/lib/iterate";
+import {LexiconHandle} from "./lexicons";
 import {range} from "./range";
 import {shuffledString} from "./shuffle";
 
-export class Lexicon {
+export interface LexiconSize {
+    readonly numWords: number;
+    readonly numChars: number;
+    readonly numBytes: number;
+}
+
+export interface LexiconMetadata {
     readonly name: string;
+    readonly size: LexiconSize;
+}
+
+export class LexiconMetadataImpl implements LexiconMetadata {
+    
+    constructor(protected metadata: LexiconMetadata) {}
+    
+    get name(): string {
+        return this.metadata.name;
+    }
+    
+    get size(): LexiconSize {
+        return this.metadata.size;
+    }
+    
+    toString(): string {
+        return `Lexicon ${this.name}`;
+    }
+    
+}
+
+export class Lexicon extends LexiconMetadataImpl {
+    readonly handle: LexiconHandle;
     private readonly words: ReadonlySet<string>;
     private readonly rawWordsByLength: readonly ReadonlyArray<string>[];
     
-    constructor(name: string, words: Iterable<string>) {
-        this.name = name;
+    constructor(handle: LexiconHandle, words: Iterable<string>) {
+        super(handle);
+        this.handle = handle;
         this.words = iterate(words)
             .filter(s => s.length > 0)
             .map(s => s.toLowerCase())
@@ -113,8 +144,3 @@ export interface WordChecker {
     words(words: readonly string[]): boolean;
     
 }
-
-// Lexicons are available under /lexicons/${name}.txt
-// But their names are hard-coded in JS.
-// It's pretty easy to keep these in sync,
-// and it saves an extra fetch.
