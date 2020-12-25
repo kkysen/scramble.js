@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/scramble.js/static/css/main.0520008e.chunk.css",
+    "main.js": "/scramble.js/static/js/main.81941738.chunk.js",
+    "main.js.map": "/scramble.js/static/js/main.81941738.chunk.js.map",
+    "runtime-main.js": "/scramble.js/static/js/runtime-main.f8bf0d19.js",
+    "runtime-main.js.map": "/scramble.js/static/js/runtime-main.f8bf0d19.js.map",
+    "static/css/2.fe708519.chunk.css": "/scramble.js/static/css/2.fe708519.chunk.css",
+    "static/js/2.57514709.chunk.js": "/scramble.js/static/js/2.57514709.chunk.js",
+    "static/js/2.57514709.chunk.js.map": "/scramble.js/static/js/2.57514709.chunk.js.map",
+    "static/js/3.51e75dc8.chunk.js": "/scramble.js/static/js/3.51e75dc8.chunk.js",
+    "static/js/3.51e75dc8.chunk.js.map": "/scramble.js/static/js/3.51e75dc8.chunk.js.map",
+    "index.html": "/scramble.js/index.html",
+    "static/css/2.fe708519.chunk.css.map": "/scramble.js/static/css/2.fe708519.chunk.css.map",
+    "static/css/main.0520008e.chunk.css.map": "/scramble.js/static/css/main.0520008e.chunk.css.map",
+    "static/js/2.57514709.chunk.js.LICENSE.txt": "/scramble.js/static/js/2.57514709.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f8bf0d19.js",
+    "static/css/2.fe708519.chunk.css",
+    "static/js/2.57514709.chunk.js",
+    "static/css/main.0520008e.chunk.css",
+    "static/js/main.81941738.chunk.js"
+  ]
+}
