@@ -20,7 +20,7 @@ const Letter: FC<{
         const b: Point = {boardSize: 25, scale: 2};
         const slope = (a.scale - b.scale) / (a.boardSize - b.boardSize);
         const scale = slope * (boardSize - a.boardSize) + a.scale;
-        return n => n / scale;
+        return n => (n / scale) * 1.5;
     })();
     
     return <div
