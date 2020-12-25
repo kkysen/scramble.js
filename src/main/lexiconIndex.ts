@@ -6,25 +6,25 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
     {
         "name": "American English Huge",
         "size": {
-            "numWords": 246768,
-            "numChars": 2284488,
-            "numBytes": 2532046
+            "numWords": 246744,
+            "numChars": 2284464,
+            "numBytes": 2531998
         }
     },
     {
         "name": "American English Insane",
         "size": {
-            "numWords": 429002,
-            "numChars": 4120381,
-            "numBytes": 4550173
+            "numWords": 428978,
+            "numChars": 4120357,
+            "numBytes": 4550125
         }
     },
     {
         "name": "American English Large",
         "size": {
-            "numWords": 114230,
-            "numChars": 1001341,
-            "numBytes": 1115821
+            "numWords": 114206,
+            "numChars": 1001317,
+            "numBytes": 1115773
         }
     },
     {
@@ -38,9 +38,9 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
     {
         "name": "American English",
         "size": {
-            "numWords": 63366,
-            "numChars": 525970,
-            "numBytes": 589464
+            "numWords": 63342,
+            "numChars": 525946,
+            "numBytes": 589416
         }
     },
     {
@@ -62,17 +62,17 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
     {
         "name": "British English",
         "size": {
-            "numWords": 62979,
-            "numChars": 523049,
-            "numBytes": 586154
+            "numWords": 62955,
+            "numChars": 523025,
+            "numBytes": 586106
         }
     },
     {
         "name": "Canadian English",
         "size": {
-            "numWords": 63306,
-            "numChars": 525761,
-            "numBytes": 589195
+            "numWords": 63282,
+            "numChars": 525737,
+            "numBytes": 589147
         }
     },
     {
@@ -97,14 +97,6 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numWords": 15,
             "numChars": 47,
             "numBytes": 62
-        }
-    },
-    {
-        "name": "English",
-        "size": {
-            "numWords": 410322,
-            "numChars": 3802737,
-            "numBytes": 4213059
         }
     },
     {
