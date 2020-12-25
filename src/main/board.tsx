@@ -78,27 +78,28 @@ export const Board: FC<{
     wordChecker: WordChecker;
     Solution: FC<SolutionProps>;
 }> = ({words: {solution, shuffled}, wordChecker: check, Solution}) => {
-    console.log(solution);
-    
-    const initState = useCallback(() => {
-        return {x: -1, y: -1, words: shuffled, solved: check.words(shuffled), numMoves: 0};
+    const initState = useCallback((isFirst: boolean) => {
+        return {isFirst, x: -1, y: -1, words: shuffled, solved: check.words(shuffled), numMoves: 0};
     }, [check, shuffled]);
     
-    const [{x, y, words, solved, numMoves}, setState] = useState(initState);
+    const [{isFirst, x, y, words, solved, numMoves}, setState] = useState(initState(true));
     const showingSolution = words === solution;
     
     useEffect(() => {
-        setState(initState());
+        console.log(solution.join("\n"));
+        if (!isFirst) {
+            setState(initState(false));
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [initState]);
     
     function setIJ(i: number, j: number) {
         if (y === -1 || x === -1) {
             // no letters clicked on yet
-            setState({x: i, y: j, words, solved, numMoves});
+            setState({isFirst: false, x: i, y: j, words, solved, numMoves});
         } else if (x === i && y === j) {
             // clicked on same letter twice
-            setState({x: -1, y: -1, words, solved, numMoves});
+            setState({isFirst: false, x: -1, y: -1, words, solved, numMoves});
         } else {
             // one letter clicked on, so swap them now
             const splitWords = words.map(word => [...word]);
@@ -107,6 +108,7 @@ export const Board: FC<{
             splitWords[x][y] = temp;
             const newWords = splitWords.map(word => word.join(""));
             setState({
+                isFirst: false,
                 x: -1,
                 y: -1,
                 words: newWords,
@@ -131,6 +133,7 @@ export const Board: FC<{
             solved={solved}
             showingSolution={showingSolution}
             showSolution={() => setState({
+                isFirst: false,
                 x: -1,
                 y: -1,
                 words: solution,

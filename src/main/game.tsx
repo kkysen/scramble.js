@@ -19,7 +19,6 @@ const GameSolution: FC<SolutionProps> = ({solved, showingSolution, showSolution,
 
 export const Game: FC<GameOptions> = ({lexicon, size}) => {
     const words = lexicon.randomShuffledWords(size);
-    console.log(words.solution);
     return <div>
         <Board
             words={words}
