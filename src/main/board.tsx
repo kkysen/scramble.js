@@ -89,6 +89,17 @@ export const Board: FC<{
     const [{isFirst, x, y, words, solved, numMoves}, setState] = useState(initState(true));
     const showingSolution = words === solution;
     
+    function setWords(args: {words: readonly string[]; move: boolean, solved?: boolean}) {
+        setState({
+            isFirst: false,
+            x: -1,
+            y: -1,
+            words: args.words,
+            solved: args.solved ?? check.words(args.words),
+            numMoves: numMoves + (args.move ? 1 : 0),
+        });
+    }
+    
     useEffect(() => {
         if (!isFirst) {
             console.log(solution.join("\n"));
@@ -105,22 +116,14 @@ export const Board: FC<{
             setState({isFirst: false, x: i, y: j, words, solved, numMoves});
         } else if (x === i && y === j) {
             // clicked on same letter twice
-            setState({isFirst: false, x: -1, y: -1, words, solved, numMoves});
+            setWords({words, move: false, solved});
         } else {
             // one letter clicked on, so swap them now
             const splitWords = words.map(word => [...word]);
             const temp = splitWords[i][j];
             splitWords[i][j] = splitWords[x][y];
             splitWords[x][y] = temp;
-            const newWords = splitWords.map(word => word.join(""));
-            setState({
-                isFirst: false,
-                x: -1,
-                y: -1,
-                words: newWords,
-                solved: check.words(newWords),
-                numMoves: numMoves + 1,
-            });
+            setWords({words: splitWords.map(word => word.join("")), move: true});
         }
     }
     
@@ -138,26 +141,9 @@ export const Board: FC<{
         <Solution
             solved={solved}
             showingSolution={showingSolution}
-            showSolution={() => setState({
-                isFirst: false,
-                x: -1,
-                y: -1,
-                words: solution,
-                solved: true,
-                numMoves,
-            })}
+            showSolution={() => setWords({words: solution, move: false, solved: true})}
             numMoves={numMoves}
-            shuffle={() => {
-                const newWords = shuffleWords.shuffle();
-                setState({
-                    isFirst: false,
-                    x: -1,
-                    y: -1,
-                    words: newWords,
-                    solved: check.words(newWords),
-                    numMoves,
-                });
-            }}
+            shuffle={() => setWords({words: shuffleWords.shuffle(), move: false})}
         />
     </>;
 };
