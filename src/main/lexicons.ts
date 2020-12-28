@@ -202,9 +202,12 @@ const langCodeToLexiconName = ((): (langId: IsoLangId) => keyof LexiconIndex | u
     };
     return langId => {
         const lang = iso_lang_codes.byId[langId];
+        if (!lang) {
+            console.error(`"${langId}" is not an IETF BCP 47 language code`);
+            return;
+        }
         let lexiconName = convert[lang.name];
         if (lexiconName) {
-            console.log(lexiconName);
             return lexiconName;
         }
         const baseLang = toBaseIsoLang(lang);
@@ -213,7 +216,6 @@ const langCodeToLexiconName = ((): (langId: IsoLangId) => keyof LexiconIndex | u
         }
         lexiconName = convert[baseLang.name];
         if (lexiconName) {
-            console.log(lexiconName);
             return lexiconName;
         }
         return;

@@ -2,6 +2,9 @@
 
 // this code is to run in the above website to generate the list of codes
 
+import {globals} from "./globals";
+import {isNotUndefined} from "./is";
+
 interface GenericIsoLangCode {
     readonly code: number;
     readonly id: string;
@@ -21,7 +24,10 @@ function queryIsoLangCodes(): readonly GenericIsoLangCode[] {
 
 function isoLangCodesByKey<K extends keyof GenericIsoLangCode>(codes: readonly GenericIsoLangCode[],
                                                                key: K): {readonly [key: string]: GenericIsoLangCode} {
-    return codes.reduce((obj, code) => (obj[code[key]] = code, obj), {} as {[key: string]: GenericIsoLangCode});
+    return codes.reduce((obj, code) => {
+        obj[code[key]] = code;
+        return obj;
+    }, {} as {[key: string]: GenericIsoLangCode});
 }
 
 function createIsoLangCodes() {
@@ -5896,10 +5902,23 @@ export type IsoLangId = keyof typeof iso_lang_codes.byId;
 export type IsoLangName = keyof typeof iso_lang_codes.byName;
 export type IsoLang = typeof iso_lang_codes.byId[IsoLangId];
 
-export const browserLanguage = navigator.language as IsoLangId;
-export const browserLanguages = (navigator.languages as readonly IsoLangId[]) ?? [browserLanguage];
+export function toIsoLangId(id: string): IsoLangId | undefined {
+    if (iso_lang_codes.byId.hasOwnProperty(id)) {
+        return id as IsoLangId;
+    }
+    const ids = Object.keys(iso_lang_codes.byId) as readonly IsoLangId[];
+    const lowerCaseId = id.toLowerCase();
+    return ids.find(langId => langId.toLowerCase() === lowerCaseId);
+}
 
 export function toBaseIsoLang(lang: IsoLang): IsoLang | undefined {
     const baseId = lang.id.split("-")[0];
     return iso_lang_codes.byId[baseId as IsoLangId] as IsoLang | undefined;
 }
+
+export const browserLanguage: IsoLangId | undefined = toIsoLangId(navigator.language);
+export const browserLanguages: readonly IsoLangId[] = (navigator.languages ?? [navigator.language])
+    .map(toIsoLangId)
+    .filter(isNotUndefined);
+
+globals({iso_lang_codes, toIsoLangId, toBaseIsoLang, browserLanguage, browserLanguages});
