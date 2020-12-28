@@ -16,15 +16,17 @@ export interface LexiconMetadata {
     readonly size: LexiconSize;
 }
 
-export interface LexiconMetadataPlus extends LexiconMetadata {
+export interface LexiconMetadataPlus<Metadata extends LexiconMetadata> extends LexiconMetadata {
+    readonly metadata: Metadata;
+    
     toString(): string;
     
     label(): string;
 }
 
-export class LexiconMetadataImpl implements LexiconMetadataPlus {
+export class LexiconMetadataImpl<Metadata extends LexiconMetadata> implements LexiconMetadataPlus<Metadata> {
     
-    constructor(protected metadata: LexiconMetadata) {}
+    constructor(readonly metadata: Metadata) {}
     
     get name(): string {
         return this.metadata.name;
@@ -44,13 +46,13 @@ export class LexiconMetadataImpl implements LexiconMetadataPlus {
     
 }
 
-export class Lexicon extends LexiconMetadataImpl {
-    readonly handle: LexiconHandle;
+export class Lexicon<Metadata extends LexiconMetadata = LexiconMetadata> extends LexiconMetadataImpl<Metadata> {
+    readonly handle: LexiconHandle<Metadata>;
     private readonly words: ReadonlySet<string>;
     private readonly rawWordsByLength: readonly ReadonlyArray<string>[];
     
-    constructor(handle: LexiconHandle, words: Iterable<string>) {
-        super(handle);
+    constructor(handle: LexiconHandle<Metadata>, words: Iterable<string>) {
+        super(handle.metadata);
         this.handle = handle;
         this.words = iterate(words)
             .filter(s => s.length > 0)

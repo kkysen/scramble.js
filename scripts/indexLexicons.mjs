@@ -2,6 +2,7 @@ import {promises as fsp} from "fs";
 import {iterate} from "iterare";
 import * as pathLib from "path";
 import {main} from "./run.mjs";
+import {capitalize} from "./util.mjs";
 
 async function indexLexicons() {
     const dir = "./public/lexicons";
@@ -32,13 +33,14 @@ async function indexLexicons() {
         });
     const allMetadatas = await Promise.all(promises);
     const metadatas = allMetadatas.filter(e => e.size.numWords > 0);
-    const json = JSON.stringify(metadatas, null, 4);
+    const metadataObj = metadatas.reduce((o, e) => (o[e.name] = e, o), {});
+    const json = JSON.stringify(metadataObj, null, 4);
     const name = "lexiconIndex";
     const ts = `// see indexLexicons.mjs
 
-import {LexiconMetadata} from "./lexicon";
+export const ${name} = ${json} as const;
 
-export const ${name}: readonly LexiconMetadata[] = ${json};
+export type ${capitalize(name)} = typeof ${name};
 `;
     await fsp.writeFile(`./src/main/${name}.ts`, ts);
 }

@@ -1,9 +1,7 @@
 // see indexLexicons.mjs
 
-import {LexiconMetadata} from "./lexicon";
-
-export const lexiconIndex: readonly LexiconMetadata[] = [
-    {
+export const lexiconIndex = {
+    "American English Huge": {
         "name": "American English Huge",
         "size": {
             "numWords": 246744,
@@ -11,7 +9,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 2531998
         }
     },
-    {
+    "American English Insane": {
         "name": "American English Insane",
         "size": {
             "numWords": 428978,
@@ -19,7 +17,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 4550125
         }
     },
-    {
+    "American English Large": {
         "name": "American English Large",
         "size": {
             "numWords": 114206,
@@ -27,7 +25,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 1115773
         }
     },
-    {
+    "American English Small": {
         "name": "American English Small",
         "size": {
             "numWords": 40106,
@@ -35,7 +33,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 356920
         }
     },
-    {
+    "American English": {
         "name": "American English",
         "size": {
             "numWords": 63342,
@@ -43,7 +41,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 589416
         }
     },
-    {
+    "Bokmaal (Bokmål, Norsk)": {
         "name": "Bokmaal (Bokmål, Norsk)",
         "size": {
             "numWords": 727157,
@@ -51,7 +49,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 10071064
         }
     },
-    {
+    "Brazilian": {
         "name": "Brazilian",
         "size": {
             "numWords": 201214,
@@ -59,7 +57,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 2149092
         }
     },
-    {
+    "British English Huge": {
         "name": "British English Huge",
         "size": {
             "numWords": 246195,
@@ -67,7 +65,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 2528654
         }
     },
-    {
+    "British English Insane": {
         "name": "British English Insane",
         "size": {
             "numWords": 428462,
@@ -75,7 +73,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 4548013
         }
     },
-    {
+    "British English Large": {
         "name": "British English Large",
         "size": {
             "numWords": 113753,
@@ -83,7 +81,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 1112357
         }
     },
-    {
+    "British English Small": {
         "name": "British English Small",
         "size": {
             "numWords": 39820,
@@ -91,7 +89,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 354551
         }
     },
-    {
+    "British English": {
         "name": "British English",
         "size": {
             "numWords": 62955,
@@ -99,7 +97,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 586106
         }
     },
-    {
+    "Canadian English Huge": {
         "name": "Canadian English Huge",
         "size": {
             "numWords": 246732,
@@ -107,7 +105,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 2533852
         }
     },
-    {
+    "Canadian English Insane": {
         "name": "Canadian English Insane",
         "size": {
             "numWords": 429041,
@@ -115,7 +113,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 4553663
         }
     },
-    {
+    "Canadian English Large": {
         "name": "Canadian English Large",
         "size": {
             "numWords": 114188,
@@ -123,7 +121,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 1116458
         }
     },
-    {
+    "Canadian English Small": {
         "name": "Canadian English Small",
         "size": {
             "numWords": 40073,
@@ -131,7 +129,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 356867
         }
     },
-    {
+    "Canadian English": {
         "name": "Canadian English",
         "size": {
             "numWords": 63282,
@@ -139,7 +137,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 589147
         }
     },
-    {
+    "Catala (Catalan)": {
         "name": "Catala (Catalan)",
         "size": {
             "numWords": 594065,
@@ -147,7 +145,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 6784110
         }
     },
-    {
+    "Danish (Dansk)": {
         "name": "Danish (Dansk)",
         "size": {
             "numWords": 295965,
@@ -155,7 +153,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 3806959
         }
     },
-    {
+    "Dutch (Nederlands)": {
         "name": "Dutch (Nederlands)",
         "size": {
             "numWords": 304745,
@@ -163,7 +161,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 3819709
         }
     },
-    {
+    "English Sample": {
         "name": "English Sample",
         "size": {
             "numWords": 15,
@@ -171,7 +169,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 62
         }
     },
-    {
+    "Esperanto": {
         "name": "Esperanto",
         "size": {
             "numWords": 1003861,
@@ -179,7 +177,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 12381123
         }
     },
-    {
+    "Faroese (Foeroyskt)": {
         "name": "Faroese (Foeroyskt)",
         "size": {
             "numWords": 153166,
@@ -187,7 +185,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 1753096
         }
     },
-    {
+    "French": {
         "name": "French",
         "size": {
             "numWords": 137604,
@@ -195,7 +193,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 1512829
         }
     },
-    {
+    "Galician Minimos (Galician)": {
         "name": "Galician Minimos (Galician)",
         "size": {
             "numWords": 515124,
@@ -203,7 +201,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 6090218
         }
     },
-    {
+    "German Medical": {
         "name": "German Medical",
         "size": {
             "numWords": 6450,
@@ -211,7 +209,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 90046
         }
     },
-    {
+    "Italian": {
         "name": "Italian",
         "size": {
             "numWords": 108222,
@@ -219,7 +217,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 1138236
         }
     },
-    {
+    "Ngerman": {
         "name": "Ngerman",
         "size": {
             "numWords": 236985,
@@ -227,7 +225,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 3114239
         }
     },
-    {
+    "Nynorsk": {
         "name": "Nynorsk",
         "size": {
             "numWords": 483403,
@@ -235,7 +233,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 6055141
         }
     },
-    {
+    "Ogerman": {
         "name": "Ogerman",
         "size": {
             "numWords": 194769,
@@ -243,7 +241,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 2531475
         }
     },
-    {
+    "Polish": {
         "name": "Polish",
         "size": {
             "numWords": 3504057,
@@ -251,7 +249,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 49348989
         }
     },
-    {
+    "Portuguese": {
         "name": "Portuguese",
         "size": {
             "numWords": 427976,
@@ -259,7 +257,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 4974519
         }
     },
-    {
+    "Spanish": {
         "name": "Spanish",
         "size": {
             "numWords": 86016,
@@ -267,7 +265,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 852189
         }
     },
-    {
+    "Swedish (Svenska)": {
         "name": "Swedish (Svenska)",
         "size": {
             "numWords": 76661,
@@ -275,7 +273,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 796777
         }
     },
-    {
+    "Swiss": {
         "name": "Swiss",
         "size": {
             "numWords": 237045,
@@ -283,7 +281,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 3115027
         }
     },
-    {
+    "Ukrainian": {
         "name": "Ukrainian",
         "size": {
             "numWords": 1398873,
@@ -291,7 +289,7 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 30981734
         }
     },
-    {
+    "Web2": {
         "name": "Web2",
         "size": {
             "numWords": 210680,
@@ -299,4 +297,6 @@ export const lexiconIndex: readonly LexiconMetadata[] = [
             "numBytes": 2249138
         }
     }
-];
+} as const;
+
+export type LexiconIndex = typeof lexiconIndex;

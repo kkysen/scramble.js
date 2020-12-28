@@ -2,25 +2,8 @@ import * as child_process from "child_process";
 import {promises as fsp} from "fs";
 import pathLib from "path";
 import {main} from "./run.mjs";
+import {kebabToTitleCase} from "./util";
 
-
-/**
- *
- * @param {string} s
- * @return {string}
- */
-function capitalize(s) {
-    return s[0].toUpperCase() + s.slice(1);
-}
-
-/**
- *
- * @param {string} s
- * @return {string}
- */
-function kebabToTitleCase(s) {
-    return s.split("-").map(capitalize).join(" ");
-}
 
 /**
  * @param {{name: string, realPath: string, isSymlink: boolean}[]} files

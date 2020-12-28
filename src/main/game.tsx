@@ -80,7 +80,7 @@ const NewGameChooser: FC<{
     
     useEffect(() => {
         if (lexicon) {
-            lexicons.updateDefault(lexicon);
+            lexicons.tryUpdateDefault(lexicon);
         }
     }, [lexicon]);
     
@@ -101,7 +101,7 @@ const NewGameChooser: FC<{
         <Dropdown
             options={lexicons.iter().map(e => ({value: e.name, label: e.label()})).toArray()}
             value={lexiconHandle.name}
-            onChange={e => setLexiconHandle(lexicons.get(e.value))}
+            onChange={e => setLexiconHandle(lexicons.tryGet(e.value))}
         />
         {lexicon && <>
             <label>Size</label>
