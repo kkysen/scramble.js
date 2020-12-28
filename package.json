@@ -1,10 +1,10 @@
 {
     "name": "scramble",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "private": true,
     "description": "The Scramble Game",
     "author": "Khyber Sen",
-    "homepage": "https://myusername.github.io/scramble.js",
+    "homepage": "https://kkysen.github.io/scramble.js",
     "repository": {
         "type": "git",
         "url": "https://github.com/kkysen/scramble.js.git"

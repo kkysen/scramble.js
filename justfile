@@ -3,6 +3,15 @@ set shell := ["bash", "./scripts/just.sh"]
 _default:
     just --list
 
+push *args:
+    git push "{{args}}"
+
+pull *args:
+    git push "{{args}}"
+
+deploy:
+    npm run deploy
+
 node script *args:
     node "./scripts/{{script}}.mjs" {{args}}
 
