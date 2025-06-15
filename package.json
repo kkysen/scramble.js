@@ -31,7 +31,15 @@
         "typescript": "^4.0.3",
         "web-vitals": "^0.2.4"
     },
+    "devDependencies": {
+        "npm-force-resolutions": "^0.0.10"
+    },
+    "resolutions": {
+        "postcss": "7.0.35",
+        "postcss-safe-parser": "4.0.2"
+    },
     "scripts": {
+        "preinstall": "npx npm-force-resolutions",
         "predeploy": "npm run build",
         "deploy": "gh-pages --dist build",
         "start": "react-scripts start",
