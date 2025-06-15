@@ -84,7 +84,7 @@ export const Board: FC<{
     
     const initState = useCallback((isFirst: boolean) => {
         return {isFirst, x: -1, y: -1, words: shuffled, solved: check.words(shuffled), numMoves: 0};
-    }, [check, shuffled]);
+    }, [check]);
     
     const [{isFirst, x, y, words, solved, numMoves}, setState] = useState(initState(true));
     const showingSolution = words === solution;
