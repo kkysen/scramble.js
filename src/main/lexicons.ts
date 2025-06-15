@@ -65,7 +65,7 @@ class Lexicons<Index extends {[key: string]: LexiconMetadata}> {
         const entries = Object.entries(index) as unknown as readonly [keyof Index, Index[keyof Index]][];
         for (const [name, metadata] of entries) {
             if (name !== metadata.name) {
-                throw new Error(`${name} !== ${metadata.name}`);
+                throw new Error(`${String(name)} !== ${metadata.name}`);
             }
             handles[name] = new LexiconHandleImpl(metadata);
         }
